@@ -110,15 +110,17 @@
         }
 
         .loader-text::before {
-            content: "CRIMSON";
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 0%;
-            color: var(--crimson-core);
-            overflow: hidden;
-            transition: width 0.1s;
-            -webkit-text-stroke: 0px;
+    content: "CRIMSON";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: var(--fill-width, 0%); /* <--- Updated! */
+    color: var(--crimson-core);
+    overflow: hidden;
+    transition: width 0.1s;
+    -webkit-text-stroke: 0px;
+}
+
         }
 
         .progress-bar-container {
@@ -906,7 +908,7 @@
             progressText.innerText = `COMPILING GEOMETRY... ${Math.floor(loadProgress)}%`;
             
             // Sync loader text with pseudo-element width
-            document.styleSheets[0].insertRule(`.loader-text::before { width: ${loadProgress}% }`, document.styleSheets[0].cssRules.length);
+            loaderTitle.style.setProperty('--fill-width', `${loadProgress}%`);
 
         }, 100);
 
